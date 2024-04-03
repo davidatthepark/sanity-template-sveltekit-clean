@@ -5,9 +5,11 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	const q = useQuery(data);
+	const { initial } = data;
 
-	$: ({ data: posts } = $q);
+	const query = useQuery(data, {}, { initial });
+
+	$: ({ data: posts, encodeDataAttribute } = $query);
 </script>
 
 <section>

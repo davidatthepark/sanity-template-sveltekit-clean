@@ -6,14 +6,17 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	const q = useQuery(data);
+	const { initial, params } = data;
 
-	$: ({ data: post } = $q);
+	const query = useQuery(data, params, { initial });
+
+	$: ({ data: post, encodeDataAttribute } = $query);
 </script>
 
 <section class="post">
 	{#if post.mainImage}
 		<img
+			data-sanity={encodeDataAttribute(['mainImage'])}
 			class="post__cover"
 			src={urlFor(post.mainImage).url()}
 			alt="Cover image for {post.title}"

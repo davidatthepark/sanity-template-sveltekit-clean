@@ -14,6 +14,7 @@ export const load: PageServerLoad = async (event) => {
 	return {
 		query,
 		params,
-		options: { initial }
+		options: { initial },
+		initial
 	};
 };
